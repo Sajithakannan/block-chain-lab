@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Clinical Trial DApp</title>
+</head>
+<body>
+  <h2>Register Trial</h2>
+  <form id="trialForm">
+    <input placeholder="Patient ID" id="patientId" required><br>
+    <input placeholder="Treatment" id="treatment" required><br>
+    <input type="date" id="startDate" required><br>
+    <input type="date" id="endDate" required><br>
+    <input placeholder="Notes" id="notes"><br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <h2>View Trial</h2>
+  <input placeholder="Trial ID" id="trialId">
+  <button onclick="getTrial()">Get Trial</button>
+  <div id="trialOutput"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.8.2/dist/web3.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
