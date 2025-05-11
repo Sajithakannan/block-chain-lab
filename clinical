@@ -1,0 +1,44 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract ClinicalTrial {
+    address public admin;
+
+    constructor() {
+        admin = msg.sender;
+    }
+
+    modifier onlyAdmin() {
+        require(msg.sender == admin, "Access Denied");
+        _;
+    }
+
+    struct TrialRecord {
+        string patientId;
+        string treatment;
+        uint256 startDate;
+        uint256 endDate;
+        string notes;
+    }
+
+    mapping(uint => TrialRecord) public trials;
+    uint public trialCount;
+
+    function registerTrial(
+        string memory _patientId,
+        string memory _treatment,
+        uint256 _startDate,
+        uint256 _endDate,
+        string memory _notes
+    ) public onlyAdmin {
+        trials[trialCount] = TrialRecord(_patientId, _treatment, _startDate, _endDate, _notes);
+        trialCount++;
+    }
+
+    function getTrial(uint _id) public view returns (
+        string memory, string memory, uint256, uint256, string memory
+    ) {
+        TrialRecord memory record = trials[_id];
+        return (record.patientId, record.treatment, record.startDate, record.endDate, record.notes);
+    }
+}
